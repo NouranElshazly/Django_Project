@@ -1,0 +1,44 @@
+ 
+   <header id="header" class="header-shadow sticky-top" style=" box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+        <div class="container py-2">
+            <div class="row align-items-center g-3">
+                <div class="col-12 col-lg-2 order-1 order-lg-1">
+                    <a href="#" class="logo text-decoration-none" >QuickPick</a>
+                </div>
+
+                <div id="header_content" class="col-12 col-lg-6 order-2 order-lg-3 text-end">
+                    <div class="d-flex gap-3 justify-content-end align-items-center">
+                        <a href="{% url 'all_products' %}" class="nav-link text-decoration-none ">Products</a>
+                        <a href="{% url 'all_categ' %}" class="nav-link text-decoration-none">Categories</a>
+                        {% if user.id %}
+                   
+                            <form method="post"  action="{% url 'logout' %}">
+                                {% csrf_token %}
+                             
+                           <button type="submit" class="btn btn-primary text-decoration-none">Logout</button></form>
+                           Welcome {{user}}
+                           <img src="{{user.profile_picture}}"  width="100" height="100 " class="rounded"  alt="user_image">
+                        {% else %}
+                        <a href="{% url 'login' %}" class="btn btn-primary text-decoration-none">Login</a>
+                        {% endif  %}
+                        <a class="nav-link" href="{% url 'cart_detail' %}">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-danger">{{ cart_item_count }}</span></a>
+                    </div>
+                    
+                      
+                       
+                </div>
+         
+                <div id="search_part" class="col-12 col-lg-4 order-3 order-lg-2">
+                    <form class="d-flex"   action="{%url 'all_products'%}" method="get"> 
+                        <input class="form-control me-2" name="search"  type="search" placeholder="Search about your products" aria-label="Search">
+                        <button class="btn" type="submit">Search</button>
+                      </form>
+           
+                </div>
+  
+            </div>
+        </div>
+    </header>
+ 

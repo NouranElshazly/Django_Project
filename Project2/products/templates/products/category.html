@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+{%block header %}
+<title>Category page</title>
+<style>
+      /* Breadcrumbs */
+  .breadcrumbs {
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    width: 100% !important  ;
+  }
+  
+  .breadcrumbs a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+ 
+ 
+</style>
+{% endblock header %}
+
+{% load static%}
+{% block main_content %}
+<div>
+  <a href="{% url 'add_category' %}" class="btn btn-primary mt-5">Add Category</a>
+
+
+</div>
+
+<div class="section-title">
+    <img src="{% static 'products/images/leftarrows.png' %}" class="arrow" alt="left arrow">
+    <h2>Category page </h2>
+    <img src="{% static 'products/images/arrows.png' %}" class="arrow" alt="left arrow">
+  </div>
+
+ 
+  <div class="d-flex gap-1  flex-wrap justify-content-center" style="padding-bottom: 20px;">
+    <div class="d-flex gap-1 flex-wrap justify-content-center" style="padding-bottom: 20px;">
+        {% for all_category in categories %}
+          <div class="card" id="cards_view" style="width: 20rem;">
+            <div class="card-body" style="background-color: rgb(65, 105, 225);">
+              <h5 class="card-title"> <a href="{% url 'one_category' category_id=all_category.id %}" style="text-decoration: none; color:white; ">{{ all_category.name }}</a>  </h5>
+            </div>
+        
+            <a  class="btn btn-outline-dark btn-success text-decoration-none text-light" href="{% url 'edit_category' all_category.id %}">Edit</a>
+ 
+          </div>
+        {% empty %}
+          <h3>{{ error_message }}</h3>
+        {% endfor %}
+      </div>
+ {% endblock main_content %}
+ 

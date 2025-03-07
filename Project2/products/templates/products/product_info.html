@@ -1,0 +1,63 @@
+
+{% extends "base.html" %}
+{%block header %}
+<title>Product_details page</title>
+{% endblock header %}
+
+{% load static%}
+{% block main_content %}
+<div class="section-title">
+    <img src="{% static 'products/images/leftarrows.png' %}" class="arrow" alt="left arrow">
+    <h2>{{product.title}}  Details </h2>
+    <img src="{% static 'products/images/arrows.png' %}" class="arrow" alt="left arrow">
+  </div>
+  <div class="container mt-5   p-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+ 
+                <button class="btn btn-primary  "><a class="text-light text-decoration-none" href="{% url 'edit_product' product.id %}">Edit</a></button>
+           
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                Delete
+            </button>
+            <div class="card shadow-lg border-2 ">
+                <img src="{{ product.thumbnail }}" class="card-img-top" alt="Product Image">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{product.title}} </h5>
+                    <p class="card-text text-muted">{{product.description}}</p>
+                    <p class="price">${{product.price}}</p>
+                    <p class="rating">⭐ {{product.rating}}</p>
+                    <!-- <h6 class="text-danger"><del></del> <span class="text-success">$79.99</span></h6> -->
+                    <div class="d-flex justify-content-center gap-2 mt-3">
+                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">Add to Cart</a>
+                
+                    </div>
+                </div>
+            </div>
+         </div>
+    </div>
+ 
+
+</div>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete "<strong>{{ product.title }}</strong>"?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'delete_product' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock main_content  %}

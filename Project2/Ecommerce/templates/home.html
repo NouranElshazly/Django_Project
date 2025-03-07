@@ -1,0 +1,14 @@
+ {% extends "base.html" %}
+ {%block header %}
+ <title>Home page</title>
+ {% endblock header %}
+
+{%load static %}
+ {% block main_content %}
+ <div class="section-title">
+    <img src="{% static 'products/images/leftarrows.png' %}" class="arrow" alt="left arrow">
+    <h2>Welcom To QuickPick Store</h2>
+    <img src="{% static 'products/images/arrows.png' %}" class="arrow" alt="left arrow">
+  </div>
+    
+ {% endblock main_content  %}
